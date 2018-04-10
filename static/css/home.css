@@ -1,0 +1,102 @@
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #1f1f1f;
+}
+nav.navbar {
+    z-index: 2;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 100px 0 0px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.page-header {
+    text-align: center;
+    color: white;
+    border: none;
+    margin-top: 56vh;
+    padding-top: 0;
+    height: 100%;
+}
+
+ .section {
+    /* background-attachment: fixed; */
+    background-size: auto 80%;
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+}
+#section1 {
+    background-image: url(../images/stock/landing1.jpeg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    position: absolute;
+    width: 100vw;
+}
+
+ .intro h1 {
+     font-size: 6em;
+     font-weight: bold;
+     color: #41eae4;
+     text-shadow: 1px 1px 4px black;
+     width: 75%;
+     border-bottom: 3px solid #3800928a;
+     margin: 0 auto;
+ }
+ .page-header p {
+     color: #1bf3df;
+     font-size: 2em;
+     font-weight: 900;
+     text-shadow: 0px 0px 7px black;
+     opacity: .8;
+ }
+ .page-header h1 {
+    font-size: 5em;
+    border-bottom: 3px solid;
+}
+/* Content page
+	 * --------------------------------------- */
+ .header {
+    padding-top: 80px;
+    text-align: center;
+}
+.header h1 {
+    font-size: 5em;
+    font-weight: bold;
+    color: #fff;
+}
+.header p {
+    color: #f2f2f2;
+    font-size: 1.7em;
+}
+.page {
+    width: 90%;
+    margin: 60px auto;
+    background:white;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    /* Safari<=5 Android<=3 */
+    -moz-box-sizing: border-box;
+    /* <=28 */
+    box-sizing: border-box;
+}
+.page p {
+    font-style: 12px;
+    margin: 20px 0 0 0;
+    line-height: 1.35em;
+    color: #333;
+}
