@@ -10,5 +10,5 @@ exports.maillist_create = [
         });
        
              console.log(req.body.email+" added to Mailing List!");
-             res.send(req.body.email+" added to Mailing List!");
+             res.send(req.body.email+" added to RENT EVERYTHING mailing list!");
         }];
