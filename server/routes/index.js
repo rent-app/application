@@ -1,6 +1,9 @@
 const membersController = require('../controllers').members;
 const fetch = require('node-fetch');
 const fs = require('fs');
+
+var maillistController = require('../controllers/maillist');
+
 module.exports = (app, sessionChecker) => {
   // Wrapper function to fetch
   function _api(url) {
@@ -11,6 +14,9 @@ module.exports = (app, sessionChecker) => {
         .catch(err => reject(err))
     })
   }
+
+  // route for new Mailing List email
+  app.post('/maillist/create', maillistController.maillist_create);
 
 
   // route for Home-Page
