@@ -1,102 +1,62 @@
-'use strict';
-const bcrypt = require("bcrypt");
-module.exports = (sequelize, DataTypes) => {
-  const Member = sequelize.define('member', {
+// Connected to MongoDB database
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
+const MemberSchema = new Schema({
     username: {
-      type: DataTypes.STRING,
+      type: String,
+      minlength: 1,
+      maxlength: 50,
       unique: true,
       allowNull: false,
     },
     first_name: {
-      type: DataTypes.STRING,
+      type: String,
+      minlength: 1,
+      maxlength: 50,
+      unique: true,
       allowNull: false,
     },
     last_name: {
-      type: DataTypes.STRING,
+      type: String,
+      minlength: 1,
+      maxlength: 50,
+      unique: true,
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      }
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        lowercase: true,
+        unique: true,
+        allowNull: false,
     },
     confirmed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+        type: Boolean,
+        default: false,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
+    id_member: {
+        type: Number,
+        unique: true,
     },
-//   password_digest: {
-//   type: DataTypes.STRING,
-//   validate: {
-//     notEmpty: true
-//   }
-// },
-// password: {
-//   type: DataTypes.VIRTUAL,
-//   allowNull: false,
-//   validate: {
-//     notEmpty: true
-//   }
-// },
-// password_confirmation: {
-//   type: DataTypes.VIRTUAL
-// }
-  },
+    phone: {
+        type: String,
+        minlength: 7,
+        maxlength: 15,
+    },
+    hashed_password: {
+        type: String,
+        allowNull: false,
+    },
+// image should be a URL link to image
+    image: {
+        type: String,
+        default: "https://en.wikipedia.org/wiki/Smiley#/media/File:SNice.svg",
+    },
+    timestamp: { type: Date, default: Date.now },
+});
 
-  {
-      hooks: {
-        beforeCreate: (user) => {
-          user.username = user.username.toLowerCase();
-          user.email = user.email.toLowerCase();
-          const salt = bcrypt.genSaltSync();
-          user.password = bcrypt.hashSync(user.password, salt);
-        }
-      },
-      instanceMethods: {
-        validPassword: function(password) {
-          return bcrypt.compareSync(password, this.password);
-        }
-      }}
-
-
-);
-
-
-// Member.beforeCreate(function(user, options, callback) {
-// 	user.email = user.email.toLowerCase();
-// 	if (user.password)
-// 		return hasSecurePassword(user, options, callback);
-// 	else
-// 		return null;
-// })
-// Member.beforeUpdate(function(user, options, callback) {
-// 	user.email = user.email.toLowerCase();
-// 	if (user.password)
-// 		return hasSecurePassword(user, options, callback);
-// 	else
-// 		return null;
-// })
-
-  // Member.beforeCreate(function(model, options) {
-  //   debug('Info: ' + 'Storing the password');
-  //
-  //   return new Promise ((resolve, reject) => {
-  //       model.generateHash(model.password, function(err, encrypted) {
-  //           if (err) return reject(err);
-  //           debug('Info: ' + 'getting ' + encrypted);
-  //
-  //           model.password = encrypted;
-  //           debug('Info: ' + 'password now is: ' + model.password);
-  //           return resolve(model, options);
-  //       });
-  //   });
-  // });
-
-  return Member;
-};
+module.exports = mongoose.model('Member', MemberSchema);
