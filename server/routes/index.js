@@ -14,45 +14,29 @@ module.exports = (app, sessionChecker) => {
         .catch(err => reject(err))
     })
   }
+  // Helper function to wrapp page load redering
+  function loadPage(res, req, layout, file_id, title ){
+    res.render(layout, {
+      page: function(){ return file_id},
+      scripts: function(){ return file_id+'_scripts'},
+      links: function(){ return file_id+'_links'},
+      title: title,
+      nav: file_id,
+    });
+  }
+
 
   // route for new Mailing List email
   app.post('/maillist/create', maillistController.maillist_create);
 
 
-  // route for Home-Page
-  app.get('/', sessionChecker, (req, res) => {
-      // res.redirect('/login');
-      res.render('full', {
-        page: function(){ return 'home'},
-        scripts: function(){ return 'home_scripts'},
-        links: function(){ return 'home_links'},
-        title: "Welcome",
-        nav: "home",
-      });
-  });
-  // route for Test-Page
-  app.get('/test', (req, res) => {
-      // res.redirect('/login');
-      res.render('base', {
-        page: function(){ return 'test'},
-        scripts: function(){ return 'test_scripts'},
-        links: function(){ return 'test_links'},
-        title: "Welcome",
-        nav: "test",
-      });
-  });
 
   // route for Home-Page
-  app.get('/inventory', sessionChecker, (req, res) => {
-      // res.redirect('/login');
-      res.render('base', {
-        page: function(){ return 'inventory'},
-        scripts: function(){ return 'inventory_scripts'},
-        links: function(){ return 'inventory_links'},
-        title: "Inventory",
-        nav: "inventory",
-      });
-  });
+app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
+  // route for Inventory-Page
+app.get('/inventory', sessionChecker, (req, res) => loadPage(res, req, 'base', 'inventory', 'Available Listings'));
+
+
   // route for user signup
   app.route('/signup')
       .get(sessionChecker, (req, res) => {
