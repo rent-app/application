@@ -100,3 +100,16 @@ nav.navbar {
     line-height: 1.35em;
     color: #333;
 }
+button#landingBtn {
+    color: white;
+    background: #00000057;
+    padding: .5% 4%;
+    font-size: 150%;
+    font-weight: 300;
+    border: 2px solid;
+}
+button#landingBtn:hover {
+    background: #51e4d3;
+    color: black;
+    font-weight: bold;
+}
