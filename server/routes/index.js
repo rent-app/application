@@ -1,5 +1,6 @@
 const memberController = require('../controllers/member');
 const maillistController = require('../controllers/maillist');
+const postingController = require('../controllers/posting');
 const fetch = require('node-fetch');
 const fs = require('fs');
 
@@ -34,7 +35,10 @@ module.exports = (app, sessionChecker) => {
   app.post('/member/create', memberController.member_create);
   
   // test route for fake new Member
-  app.post('/member/test', memberController.member_test_create);  
+  app.post('/member/test', memberController.member_test_create);
+  
+  // route for new Posting
+  app.post('/posting/create', postingController.posting_create);
   
   // route for Home-Page
 app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));

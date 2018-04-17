@@ -45,7 +45,7 @@ const PostingSchema = new Schema({
     },
     id_member: {
         type: Number,
-        unique: true,
+        unique: false,
         index: false,
     },
 // image should be a URL link to image
