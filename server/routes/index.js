@@ -43,14 +43,14 @@ module.exports = (app, sessionChecker) => {
   });
 
   // route for Home-Page
-  app.get('/manifest', sessionChecker, (req, res) => {
+  app.get('/inventory', sessionChecker, (req, res) => {
       // res.redirect('/login');
       res.render('base', {
-        page: function(){ return 'manifest'},
-        scripts: function(){ return 'manifest_scripts'},
-        links: function(){ return 'manifest_links'},
-        title: "Manifest",
-        nav: "manifest",
+        page: function(){ return 'inventory'},
+        scripts: function(){ return 'inventory_scripts'},
+        links: function(){ return 'inventory_links'},
+        title: "Inventory",
+        nav: "inventory",
       });
   });
   // route for user signup

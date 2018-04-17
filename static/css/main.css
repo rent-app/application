@@ -46,3 +46,32 @@ nav#mainNav a {
 nav#mainNav a:hover {
     color: white;
 }
+#mainNav #signupBtn{
+    color: #d3d3d4;
+    background: none;
+    border-radius: 0;
+    margin-bottom: -1px;
+    float: right;
+}
+#mainNav #signupBtn:hover{
+    color: white;
+    background: #6dd4cf;
+}
+
+
+#mainNav input.form-control {
+    border:  none;
+    border-radius: 0;
+    background:  no-repeat;
+    color: white;
+}
+
+#mainNav form.navbar-form {
+    border-bottom: 1px solid #b8b8bc;
+    padding-right:  0;
+    opacity: .5;
+}
+
+#mainNav form.navbar-form:hover {
+    opacity:  1;
+}
