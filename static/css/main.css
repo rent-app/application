@@ -70,6 +70,7 @@ nav#mainNav a:hover {
     border-bottom: 1px solid #b8b8bc;
     padding-right:  0;
     opacity: .5;
+    margin-left: 20px;
 }
 
 #mainNav form.navbar-form:hover {
