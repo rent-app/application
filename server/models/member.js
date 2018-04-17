@@ -1,102 +1,74 @@
-'use strict';
-const bcrypt = require("bcrypt");
-module.exports = (sequelize, DataTypes) => {
-  const Member = sequelize.define('member', {
+// Connected to MongoDB database
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
+const MemberSchema = new Schema({
+    id_member: {
+        type: Number,
+        unique: true,
+        index: true,
+    },
     username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        allowNull: false,
+        unique: true,
+        index: false,
     },
     first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        unique: false,
+        index: false,
     },
     last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        unique: false,
+        index: false,
     },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      }
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        lowercase: true,
+        allowNull: false,
+        index: false,
     },
     confirmed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+        type: Boolean,
+        default: false,
+        index: false,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
+    phone: {
+        type: String,
+        unique: false,
+        minlength: 7,
+        maxlength: 15,
+        index: false,
     },
-//   password_digest: {
-//   type: DataTypes.STRING,
-//   validate: {
-//     notEmpty: true
-//   }
-// },
-// password: {
-//   type: DataTypes.VIRTUAL,
-//   allowNull: false,
-//   validate: {
-//     notEmpty: true
-//   }
-// },
-// password_confirmation: {
-//   type: DataTypes.VIRTUAL
-// }
-  },
+    hashed_password: {
+        type: String,
+        allowNull: false,
+        index: false,
+    },
+// image should be a URL link to image
+    image: {
+        type: String,
+        unique: false,
+        default: "https://en.wikipedia.org/wiki/Smiley#/media/File:SNice.svg",
+        index: false,
+    },
+    timestamp: {
+        type: Date, 
+        default: Date.now,
+        index: false,
+    },
+});
 
-  {
-      hooks: {
-        beforeCreate: (user) => {
-          user.username = user.username.toLowerCase();
-          user.email = user.email.toLowerCase();
-          const salt = bcrypt.genSaltSync();
-          user.password = bcrypt.hashSync(user.password, salt);
-        }
-      },
-      instanceMethods: {
-        validPassword: function(password) {
-          return bcrypt.compareSync(password, this.password);
-        }
-      }}
-
-
-);
-
-
-// Member.beforeCreate(function(user, options, callback) {
-// 	user.email = user.email.toLowerCase();
-// 	if (user.password)
-// 		return hasSecurePassword(user, options, callback);
-// 	else
-// 		return null;
-// })
-// Member.beforeUpdate(function(user, options, callback) {
-// 	user.email = user.email.toLowerCase();
-// 	if (user.password)
-// 		return hasSecurePassword(user, options, callback);
-// 	else
-// 		return null;
-// })
-
-  // Member.beforeCreate(function(model, options) {
-  //   debug('Info: ' + 'Storing the password');
-  //
-  //   return new Promise ((resolve, reject) => {
-  //       model.generateHash(model.password, function(err, encrypted) {
-  //           if (err) return reject(err);
-  //           debug('Info: ' + 'getting ' + encrypted);
-  //
-  //           model.password = encrypted;
-  //           debug('Info: ' + 'password now is: ' + model.password);
-  //           return resolve(model, options);
-  //       });
-  //   });
-  // });
-
-  return Member;
-};
+module.exports = mongoose.model('Member', MemberSchema);
