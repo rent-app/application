@@ -38,6 +38,7 @@ div#inventoryList{
     font-size:  150%;
     font-weight: 400;
     margin-bottom: 10px;
+    padding: 5px;
 }
 
 .card-body {
@@ -75,4 +76,31 @@ div#inventoryList{
         flex: 100%;
         max-width: 100%;
     }
+}
+
+.card-footer-sub {
+    width: 49%;
+    margin: 0 auto;
+    display: inline-block;
+}
+.card-condition {
+    display: inline-block;
+    padding: 2px 11px;
+    background: #4da993;
+    font-size: 55%;
+    border-radius: 19px;
+    font-weight: bold;
+    color: white;
+    float: right;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.card-footer-sub.card-price {
+    text-align: right;
+}
+.card-image-container img {
+    width: 100%;
+    /* border: 7px solid #b9b9b9; */
+    border-radius: 13px;
+    margin-bottom: 11px;
 }
