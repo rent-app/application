@@ -1,8 +1,9 @@
-const membersController = require('../controllers').members;
+const memberController = require('../controllers/member');
+const maillistController = require('../controllers/maillist');
 const fetch = require('node-fetch');
 const fs = require('fs');
 
-var maillistController = require('../controllers/maillist');
+
 
 module.exports = (app, sessionChecker) => {
   // Wrapper function to fetch
@@ -28,9 +29,13 @@ module.exports = (app, sessionChecker) => {
 
   // route for new Mailing List email
   app.post('/maillist/create', maillistController.maillist_create);
-
-
-
+  
+  // route for new Member
+  app.post('/member/create', memberController.member_create);
+  
+  // test route for fake new Member
+  app.post('/member/test', memberController.member_test_create);  
+  
   // route for Home-Page
 app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
@@ -38,18 +43,18 @@ app.get('/inventory', sessionChecker, (req, res) => loadPage(res, req, 'base', '
 
 
   // route for user signup
-  app.route('/signup')
-      .get(sessionChecker, (req, res) => {
-          res.render('signup');
-      })
-app.post('/signup', membersController.signup);
+//  app.route('/signup')
+//      .get(sessionChecker, (req, res) => {
+//          res.render('signup');
+//      })
+//app.post('/signup', membersController.signup);
 
   // route for user Login
-app.route('/login')
-    .get(sessionChecker, (req, res) => {
-      res.render('login');
-    })
-app.post('/login', membersController.login)
+//app.route('/login')
+//    .get(sessionChecker, (req, res) => {
+//      res.render('login');
+//    })
+//app.post('/login', membersController.login)
       // route for user's dashboard
 app.get('/dashboard', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
@@ -74,7 +79,7 @@ app.get('/logout', (req, res) => {
     message: 'Welcome to the Rent Everything API!',
   }));
 
-  app.post('/api/members', membersController.create);
+//  app.post('/api/members', membersController.create);
 
   // route for handling 404 requests(unavailable routes)
   app.use(function (req, res, next) {

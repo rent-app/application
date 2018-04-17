@@ -7,7 +7,7 @@ const ObjectId = Schema.ObjectId;
 const MailListSchema = new Schema({
     email: {
         type: String,
-        minlength: 1,
+        minlength: [49, 'not long enough'],
         maxlength: 50,
         lowercase: true,
         unique: true,
