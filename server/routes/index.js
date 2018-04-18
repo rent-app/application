@@ -44,7 +44,8 @@ module.exports = (app, sessionChecker) => {
 app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
 app.get('/inventory', sessionChecker, (req, res) => loadPage(res, req, 'base', 'inventory', 'Available Listings'));
-
+  // route for Posting-Page
+app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
 
   // route for user signup
 //  app.route('/signup')
