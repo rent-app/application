@@ -44,7 +44,7 @@ const PostingSchema = new Schema({
         index: true,
     },
     id_member: {
-        type: Number,
+        type: String,
         unique: false,
         index: false,
     },

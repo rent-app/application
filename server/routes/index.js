@@ -36,16 +36,21 @@ module.exports = (app, sessionChecker) => {
   
   // test route for fake new Member
   app.post('/member/test', memberController.member_test_create);
-  
+
+    // route for Posting-Page
+app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
+
   // route for new Posting
   app.post('/posting/create', postingController.posting_create);
+
+
+  
+  //route 
   
   // route for Home-Page
 app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
 app.get('/inventory', sessionChecker, (req, res) => loadPage(res, req, 'base', 'inventory', 'Available Listings'));
-  // route for Posting-Page
-app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
 
   // route for user signup
 //  app.route('/signup')
