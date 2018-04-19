@@ -61,4 +61,4 @@ const PostingSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('', PostingSchema);
+module.exports = mongoose.model('Posting', PostingSchema);
