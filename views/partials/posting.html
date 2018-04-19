@@ -1,7 +1,10 @@
-
-
-<div id="section1">
-    <form action="/posting/create" method="POST" class="posting">
+<div class='section' id="section1">
+    <br>><br>
+    {{#if thanks}}
+    <h1 class="thanks">Thank you, we hope to rent this out soon! Feel free to add another item below!</h1>
+    <br>
+    {{/if}}
+        <form action="/posting/create" method="POST" class="posting">
         <h1>What item would you like to post?</h1>
         Title of Posting<input type="text" name="title" placeholder="Pair of skis">
         <br>
@@ -16,7 +19,6 @@
         Image<input type="text" name="image" placeholder="Web URL">
         <input type="hidden" name="available" value=TRUE>
         <br>
-        <input type="hidden" name="id_member" value=1>
         <br>
         <input type="submit">
     </form>

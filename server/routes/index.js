@@ -38,7 +38,7 @@ module.exports = (app, sessionChecker) => {
   app.post('/member/test', memberController.member_test_create);
 
     // route for Posting-Page
-app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
+  app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
 
   // route for new Posting
   app.post('/posting/create', postingController.posting_create);

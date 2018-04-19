@@ -27,6 +27,15 @@ exports.posting_create = [
         });
     // Enter new member into database
         Posting.create(posting);
-             res.send(req.body.title+" "+new_id+" is now listed");
+             res.render('base',{
+                page: function(){return 'posting'},
+                scripts: function(){return 'posting_scripts'},
+                links: function(){return 'posting_links'},
+                title: 'Than you!',
+                nav: 'posting',
+                thanks: 1
+             }
+
+             );
              console.log("new posting: "+req.body.title+" "+new_id);
         }];
