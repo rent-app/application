@@ -161,11 +161,7 @@ span.info-label {
     letter-spacing: 1px;
     font-size: 80%;
 }
-.modal-header button.close {
-    position: absolute;
-    left: .25em;
-    top: .25em;
-}
+
 .modal-footer .requestBtn{
    background: #13bbac;
    border: none;

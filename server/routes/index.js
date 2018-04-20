@@ -30,10 +30,10 @@ module.exports = (app, sessionChecker) => {
 
   // route for new Mailing List email
   app.post('/maillist/create', maillistController.maillist_create);
-  
+
   // route for new Member
   app.post('/member/create', memberController.member_create);
-  
+
   // test route for fake new Member
   app.post('/member/test', memberController.member_test_create);
 
@@ -44,9 +44,9 @@ module.exports = (app, sessionChecker) => {
   app.post('/posting/create', postingController.posting_create);
 
 
-  
-  //route 
-  
+
+  //route
+
   // route for Home-Page
 app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
