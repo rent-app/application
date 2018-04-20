@@ -109,6 +109,24 @@ div#inventoryList{
     font-weight: 300;
     text-align: center;
 }
+.modal-calendar {
+    font-size: 150%;
+    font-weight: 300;
+    border-bottom: 1px solid #bcb9b9;
+    padding: 5px;
+}
+input.calendar {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #929292;
+    opacity: .5;
+}
+input.calendar:hover {
+    opacity: 1;
+    cursor: pointer;
+    background: #0ebbac;
+    color: white;
+}
 .modal-image img {
     width: 100%;
     border: 4px solid #9f9f9f;
@@ -161,11 +179,7 @@ span.info-label {
     letter-spacing: 1px;
     font-size: 80%;
 }
-.modal-header button.close {
-    position: absolute;
-    left: .25em;
-    top: .25em;
-}
+
 .modal-footer .requestBtn{
    background: #13bbac;
    border: none;
