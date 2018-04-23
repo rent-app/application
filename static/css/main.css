@@ -163,3 +163,7 @@ li#accountDropDown {
     left: .25em;
     top: .25em;
 }
+div#errorMessage {
+    text-align: center;
+    margin-top: 40vh;
+}
