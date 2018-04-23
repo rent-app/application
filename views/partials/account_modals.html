@@ -33,18 +33,17 @@
       </button>
       </div>
     <div class="modal-body">
-      <form action="">
+      <form action="/member/create" id="member/create" method="POST">
         <div class="account-field"><span class="modal-icon"><i class="fa fa-user"></i></span> | Full Name: <input type="text" placeholder="Kyle Jensen" name="name"/></div>
         <div class="account-field"><span class="modal-icon"><i class="fa fa-at"></i></span> | E-mail: <input type="email" placeholder="user@website.com" name="email"/></div>
         <div class="account-field"><span class="modal-icon"><i class="fa fa-camera"></i></span> | Image: <input type="url" placeholder="http://website.com/myPicture.jpg" name="image_url"/></div>
         <div class="account-field"><span class="modal-icon"><i class="fa fa-lock"></i></span> | Password: <input type="password" placeholder="" name="pwd"/></div>
         <div class="account-field"><span class="modal-icon"><i class="fa fa-user-secret"></i></span> | Confirm: <input type="password" placeholder="" name="pwd_confirm"/></div>
-
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Register</button>
+      <button type="submit" class="btn btn-primary" form="member/create">Register</button>
     </div>
     </div>
   </div>

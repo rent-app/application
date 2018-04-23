@@ -1,5 +1,23 @@
 {{> navbar }}
-    <div class="section" id="section1">
+
+<div class="section" id="section1">
+    {{#if errors}}
+    <div class="message">
+        <h1>SIGNUP ERRORS OCCURED</h1>  
+      {{#each errors}} 
+        {{this}}<br>
+        {{/each}}
+        <br>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupModal" style="color:yellow">
+        Click here to try again!  
+        </button>
+    </div>
+    {{/if}}
+    {{#if name}}
+    <div class="message">
+        Welcome, {{name}}
+    </div>
+    {{/if}}
           <div class="page-header">
             <h1>Rent Everything</h1>
             <p>

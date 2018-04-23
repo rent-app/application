@@ -5,30 +5,11 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const MemberSchema = new Schema({
-    id_member: {
-        type: Number,
-        unique: true,
-        index: true,
-    },
-    username: {
+    name: {
         type: String,
         minlength: 1,
         maxlength: 50,
         allowNull: false,
-        unique: true,
-        index: false,
-    },
-    first_name: {
-        type: String,
-        minlength: 1,
-        maxlength: 50,
-        unique: false,
-        index: false,
-    },
-    last_name: {
-        type: String,
-        minlength: 1,
-        maxlength: 50,
         unique: false,
         index: false,
     },
@@ -38,30 +19,20 @@ const MemberSchema = new Schema({
         maxlength: 50,
         lowercase: true,
         allowNull: false,
-        index: false,
+        index: true,
     },
-    confirmed: {
-        type: Boolean,
-        default: false,
-        index: false,
-    },
-    phone: {
+    image_url: {
         type: String,
+        minlength: 1,
+        maxlength: 5000,
+        allowNull: true,
         unique: false,
-        minlength: 7,
-        maxlength: 15,
         index: false,
+        default: 'https://orig00.deviantart.net/10e3/f/2013/114/8/4/facebook_default_profile_picture___clone_trooper_by_captaintom-d62v2dr.jpg'
     },
     hashed_password: {
         type: String,
         allowNull: false,
-        index: false,
-    },
-// image should be a URL link to image
-    image: {
-        type: String,
-        unique: false,
-        default: "https://en.wikipedia.org/wiki/Smiley#/media/File:SNice.svg",
         index: false,
     },
     timestamp: {
