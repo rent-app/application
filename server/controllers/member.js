@@ -42,21 +42,22 @@ exports.member_create = [
     .then(output => {
         // Hashes password
         var hash = bcrypt.hashSync(req.body.pwd, salt)
-        // Generate random 10-digit number id
-        // Enter new member into database
-        Member.create({
+        var user_creds = {
             name: req.body.name,
             email: req.body.email,
             image_url: req.body.image_url || 'https://orig00.deviantart.net/10e3/f/2013/114/8/4/facebook_default_profile_picture___clone_trooper_by_captaintom-d62v2dr.jpg',
             hashed_password: hash,
-        })
+        }
+        // Generate random 10-digit number id
+        // Enter new member into database
+        Member.create(user_creds)
         .then(output => {
           // Load the listings page
-          console.log(req.body.name+" is now a member");
+          console.log(user_creds.name+" is now a member");
+          req.session.user = user_creds;
           res.redirect('/inventory')
         })
         .catch(error => {
-          console.log(error)
           loadError(req, res, 'Oops.. Something Went wrong.');
         })
     })
@@ -71,7 +72,6 @@ exports.member_login = [
     return Member
       .findOne({ email:  req.body.email.toLowerCase() })
       .then(function (user) {
-        console.log('user--->', user)
         if (!user) return loadError(req, res, 'Invalid E-mail')
         else if (! bcrypt.compareSync(req.body.pwd, user.hashed_password)) return loadError(req, res, 'Invalid Password')
         else {
