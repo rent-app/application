@@ -84,13 +84,16 @@ var sessionChecker = (req, res, next) => {
         next();
     }
 };
+var loadError = (req, res, msg) => {
+  res.status(401).redirect('/error?msg='+encodeURIComponent(msg))
+}
 
 
 
 
 
 // Require our routes into the application.
-require('./server/routes')(app, sessionChecker);
+require('./server/routes')(app, sessionChecker, loadError);
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(404).send({

@@ -6,7 +6,7 @@ const fs = require('fs');
 
 
 
-module.exports = (app, sessionChecker) => {
+module.exports = (app, sessionChecker, loadError) => {
   // Wrapper function to fetch
   function _api(url) {
     return new Promise((resolve, reject) => {
@@ -17,13 +17,14 @@ module.exports = (app, sessionChecker) => {
     })
   }
   // Helper function to wrapp page load redering
-  function loadPage(res, req, layout, file_id, title ){
+  function loadPage(req, res, layout, file_id, title, data ){
     res.render(layout, {
       page: function(){ return file_id},
       scripts: function(){ return file_id+'_scripts'},
       links: function(){ return file_id+'_links'},
       title: title,
       nav: file_id,
+      data: data
     });
   }
 
@@ -38,7 +39,18 @@ module.exports = (app, sessionChecker) => {
   app.post('/member/test', memberController.member_test_create);
 
     // route for Posting-Page
-  app.get('/posting', sessionChecker, (req, res) => loadPage(res, req, 'base', 'posting', 'Post Your Item'));
+  app.get('/posting', sessionChecker, (req, res) => loadPage(req, res, 'base', 'posting', 'Post Your Item'));
+  // route for Error Page
+  app.get('/error', (req, res) => res.render('base', {
+        page: function(){ return 'error'},
+        title: 'Error',
+        nav: 'error',
+        scripts: function(){ return 'error_scripts'},
+        links: function(){ return 'error_links'},
+        message: req.query.msg
+      }));
+
+
 
   // route for new Posting
   app.post('/posting/create', postingController.posting_create);
@@ -48,9 +60,9 @@ module.exports = (app, sessionChecker) => {
   //route
 
   // route for Home-Page
-app.get('/', sessionChecker, (req, res) => loadPage(res, req, 'full', 'home', 'Welcome'));
+app.get('/', sessionChecker, (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
-app.get('/inventory', sessionChecker, (req, res) => loadPage(res, req, 'base', 'inventory', 'Available Listings'));
+app.get('/inventory', sessionChecker, (req, res) => loadPage(req, res, 'base', 'inventory', 'Available Listings'));
 
   // route for user signup
 //  app.route('/signup')

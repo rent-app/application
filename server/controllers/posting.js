@@ -31,7 +31,7 @@ exports.posting_create = [
                 page: function(){return 'posting'},
                 scripts: function(){return 'posting_scripts'},
                 links: function(){return 'posting_links'},
-                title: 'Than you!',
+                title: 'Thank you!',
                 nav: 'posting',
                 thanks: 1
              }
