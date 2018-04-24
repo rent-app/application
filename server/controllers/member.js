@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 var loadError = (req, res, msg) => {
   res.status(401).redirect('/error?msg='+encodeURIComponent(msg))
+  throw msg;
+  return false;
 }
 
 // Handle Member creation on POST.
@@ -11,7 +13,7 @@ exports.member_create = [
   (req, res, next) => {
     // Check to ensure inputs are valid.
     //check the email is not already registered
-    Member.find({ email: req.body.email.toLowerCase}, function(err, member) {
+    return Member.find({ email: req.body.email.toLowerCase()}, function(err, member) {
       if (err) throw err;
       if (member.length) loadError(req, res, 'Email already exsists in database')
       return 'pass'
@@ -60,7 +62,25 @@ exports.member_create = [
     })
   }
 ];
+// Handle Member creation on POST.
+exports.member_login = [
 
+  (req, res, next) => {
+    // Check to ensure inputs are valid.
+    //check the email is not already registered
+    return Member
+      .findOne({ email:  req.body.email.toLowerCase() })
+      .then(function (user) {
+        console.log('user--->', user)
+        if (!user) return loadError(req, res, 'Invalid E-mail')
+        else if (! bcrypt.compareSync(req.body.pwd, user.hashed_password)) return loadError(req, res, 'Invalid Password')
+        else {
+            req.session.user = user;
+            return res.redirect('/inventory');
+        }
+      })
+  }
+];
 // Test - Create Variables for member post
 exports.member_test_create = [
 

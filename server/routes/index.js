@@ -24,7 +24,8 @@ module.exports = (app, sessionChecker, loadError) => {
       links: function(){ return file_id+'_links'},
       title: title,
       nav: file_id,
-      data: data
+      data: data,
+      user: req.session.user,
     });
   }
 
@@ -34,7 +35,8 @@ module.exports = (app, sessionChecker, loadError) => {
 
   // route for new Member
   app.post('/member/create', memberController.member_create);
-
+  // route for Logging In
+  app.post('/member/login', memberController.member_login);
   // test route for fake new Member
   app.post('/member/test', memberController.member_test_create);
 
@@ -62,7 +64,7 @@ module.exports = (app, sessionChecker, loadError) => {
   // route for Home-Page
 app.get('/', sessionChecker, (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
-app.get('/inventory', sessionChecker, (req, res) => loadPage(req, res, 'base', 'inventory', 'Available Listings'));
+app.get('/inventory', (req, res) => loadPage(req, res, 'base', 'inventory', 'Available Listings'));
 
   // route for user signup
 //  app.route('/signup')
@@ -105,7 +107,8 @@ app.get('/logout', (req, res) => {
 
   // route for handling 404 requests(unavailable routes)
   app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!")
+    // res.status(404).send("Sorry can't find that!")
+    loadError(req, res, 'Oops.. Something Went wrong.');
   });
 
 

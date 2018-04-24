@@ -29,6 +29,7 @@
             <button type="submit" class="btn btn-default" id="signupBtn">Sign-Up for Updates</button>
           </form></li></ul>
           <ul class="nav navbar-nav navbar-right">
+            {{#if user}}<li id="navUserName">Logged In: <span>{{user.name}}</span></li>{{/if}}
             <li><a href="https://github.com/rent-app/application" target="_blank">GitHub <i class="fab fa-github"></i></a></li>
             <li class="dropdown" id="accountDropDown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i></a>

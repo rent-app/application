@@ -167,3 +167,13 @@ div#errorMessage {
     text-align: center;
     margin-top: 40vh;
 }
+li#navUserName span {
+    color: #67d5cf;
+    font-style: italic;
+}
+
+li#navUserName {
+    padding: 15px;
+    color: #cfcfd2;
+    /* font-style: italic; */
+}
