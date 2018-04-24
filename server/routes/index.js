@@ -27,8 +27,14 @@ module.exports = (app, sessionChecker, loadError) => {
       data: data,
       user: req.session.user,
     });
+
   }
 
+  function sessionChecker(req,res,next){
+    console.log(req.session.user)
+    if (!req.session.user) return loadError(req,res, 'You must be logged in for this function')
+    next()
+  }
 
   // route for new Mailing List email
   app.post('/maillist/create', maillistController.maillist_create);
@@ -52,19 +58,15 @@ module.exports = (app, sessionChecker, loadError) => {
         message: req.query.msg
       }));
 
-
-
   // route for new Posting
   app.post('/posting/create', postingController.posting_create);
-
-
 
   //route
 
   // route for Home-Page
-app.get('/', sessionChecker, (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
+app.get('/',  (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
   // route for Inventory-Page
-app.get('/inventory', (req, res) => loadPage(req, res, 'base', 'inventory', 'Available Listings'));
+app.get('/inventory', sessionChecker, (req,res) => loadPage(req, res, 'base', 'inventory', 'Available Listings'));
 
   // route for user signup
 //  app.route('/signup')

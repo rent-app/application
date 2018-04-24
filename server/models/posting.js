@@ -33,22 +33,11 @@ const PostingSchema = new Schema({
         type: String,
         index: false,
     },
-    available: {
-        type: Boolean,
-        default: false,
-        index: false,
-    },
     id_posting: {
         type: Number,
         unique: true,
         index: true,
     },
-    id_member: {
-        type: String,
-        unique: false,
-        index: false,
-    },
-// image should be a URL link to image
     image: {
         type: String,
         default: "https://emojipedia-us.s3.amazonaws.com/thumbs/160/apple/118/wrapped-present_1f381.png",
@@ -57,6 +46,21 @@ const PostingSchema = new Schema({
     timestamp: {
         type: Date,
         default: Date.now,
+        index: false,
+    },
+    seller_email: {
+        type: String,
+        unique: false,
+        index: false,
+    },
+    seller_name: {
+        type: String,
+        unique: false,
+        index: false,
+    },
+    seller_image: {
+        type: String,
+        unique: false,
         index: false,
     },
 });

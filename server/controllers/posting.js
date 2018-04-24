@@ -20,10 +20,10 @@ exports.posting_create = [
             description: req.body.description,
             location: req.body.location,
             id_posting: new_id,
-            // the member should be logged in, so they shouldn't need to enter their id #
-            // this needs to be fixed in the future
-            id_member: req.sessionID,
             image: req.body.image,
+            seller_email: req.session.user,
+            seller_name: req.session.name,
+            seller_image: req.session.image,
         });
     // Enter new member into database
         Posting.create(posting);
@@ -39,3 +39,15 @@ exports.posting_create = [
              );
              console.log("new posting: "+req.body.title+" "+new_id);
         }];
+
+exports.posting_list_all = [
+
+    (req, res, next) => {
+        return Posting
+            .find()
+            .then(function (inventory) {
+                return res.send(inventory);
+                }
+            )        
+    }
+];

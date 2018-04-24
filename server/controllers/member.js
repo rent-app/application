@@ -63,12 +63,13 @@ exports.member_create = [
     })
   }
 ];
-// Handle Member creation on POST.
+
+// Handle Member login on POST.
 exports.member_login = [
 
   (req, res, next) => {
     // Check to ensure inputs are valid.
-    //check the email is not already registered
+    // Check the login credentials
     return Member
       .findOne({ email:  req.body.email.toLowerCase() })
       .then(function (user) {
