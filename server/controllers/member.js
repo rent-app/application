@@ -11,16 +11,16 @@ exports.member_create = [
   (req, res, next) => {
     // Check to ensure inputs are valid.
     //check the email is not already registered
-    member = Member.find({ email: req.body.email.toLowerCase}, function(err, member) {
+    Member.find({ email: req.body.email.toLowerCase}, function(err, member) {
       if (err) throw err;
-      if (member.length) loadError(req, res, 'Email is already exsists used')
+      if (member.length) loadError(req, res, 'Email already exsists in database')
       return 'pass'
     })
     .then(output => {
       //checks if the length of inputs is too long
       lengthcheck = [req.body.name, req.body.email, req.body.pwd];
       for(var i = 0; i < 3; i++)
-        if(lengthcheck[i].length > 50) loadError(req, res, 'Name, email and body must be below 50 characters');
+        if(lengthcheck[i].length > 50 || lengthcheck[i].length == 0) loadError(req, res, 'Name, email and password must entered and be below 50 characters');
 
       //check the email format is correct
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.email))
@@ -54,6 +54,7 @@ exports.member_create = [
           res.redirect('/inventory')
         })
         .catch(error => {
+          console.log(error)
           loadError(req, res, 'Oops.. Something Went wrong.');
         })
     })
