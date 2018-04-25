@@ -19,9 +19,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li {{#if_equal nav "home"}} class="active" {{else}}{{/if_equal}}><a href="/">Home <span class="sr-only">(current)</span></a></li>
-            <li {{#if_equal nav "posting"}} class="active" {{else}}{{/if_equal}}><a href="/posting">Post</a></li>
             <li {{#if_equal nav "inventory"}} class="active" {{else}}{{/if_equal}}><a href="/inventory">See Listings</a></li>
-          <li>
+            <li {{#if_equal nav "posting"}} class="active" {{else}}{{/if_equal}}><a href="/posting">Post Item</a></li>
+            <li>
           <form class="navbar-form navbar-left" action="/maillist/create" method="POST">
             <div class="form-group">
              <input type="text" name="email" class="form-control" placeholder="YourAddress@email.com">
