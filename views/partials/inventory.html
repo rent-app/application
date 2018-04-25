@@ -3,40 +3,40 @@
     What do you want to rent?
   </div>
   <div id="inventoryList">
-      <div class="inventory-column">
-                <div class="inventory-card" type="button"  data-toggle="modal" data-target=".bd-example-modal-lg">
+    {{#each data}}
+                <div class="inventory-card" type="button"  data-toggle="modal" data-target="#modal-{{this._id}}">
                   <div class="card-header">
                     <div class="card-image-container">
-                      <img src="http://buyout.ph/images/2011/10/19/812/for-sale-brand-new-brand-new-nikon-d7000canon-eos-5d-mark-iinikon-d90nikon-d700_1.jpg" alt="">
+                      <img src="{{this.image}}" alt="">
                     </div>
                     <div class="card-title">
-                      Brand New Camera
+                      {{this.title}}
                         <div class="card-condition">
-                          Like New
+                          {{conditionLabel this.condition}}
                         </div>
                     </div>
                   </div>
                   <div class="card-body">
 
                     <p class="card-desc">
-                      This camera is the greatest of all cameras ever.
+                      {{this.description}}
                     </p>
 
                   </div>
                   <div class="card-footer">
                     <div class="card-footer-sub card-location">
-                      <i class="fas fa-map-marker-alt"></i> SOM Building
+                      <i class="fas fa-map-marker-alt"></i> {{this.location}}
                     </div>
                     <div class="card-footer-sub card-price">
-                    <i class="fas fa-dollar-sign"></i>  23/day
+                    <i class="fas fa-dollar-sign"></i>  {{this.price}}/day
                     </div>
                   </div>
                   </div>
-                  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div id="modal-{{this._id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Brand New Camera</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{this.title}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,13 +47,13 @@
                 When would you like to rent?
                 <input class="calendar" />
               </div>
-              <img src="http://buyout.ph/images/2011/10/19/812/for-sale-brand-new-brand-new-nikon-d7000canon-eos-5d-mark-iinikon-d90nikon-d700_1.jpg" alt="">
+              <img src="{{this.image}}" alt="">
 
 
             </div>
             <div class="modal-info">
               <div class="modal-seller-image">
-                <img src="https://seas.yale.edu/sites/default/files/imagecache/person/jensen.gif" alt="">
+                <img src="{{this.seller_image}}" alt="">
               </div>
               <div class="modal-user-rating">
                 <i class="fa fa-star"></i>
@@ -63,11 +63,11 @@
                 <i class="far fa-star"></i>
               </div>
               <ul>
-                <li><span class="info-label">Seller:</span> Kyle Jensen</li>
+                <li><span class="info-label">Seller:</span> {{this.seller_name}}</li>
                 <li><span class="info-label">Phone:</span> (777) 777-7777</li>
-                <li><span class="info-label">Email:</span> k.jensen@email.com</li>
-                <li><span class="info-label">Condition:</span> Like New</li>
-                <li><span class="info-label">Details:</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit cupiditate officiis ipsum.</li>
+                <li><span class="info-label">Email:</span> {{this.seller_email}}</li>
+                <li><span class="info-label">Condition:</span> {{conditionLabel this.condition}}</li>
+                <li><span class="info-label">Details:</span> {{this.description}}</li>
 
 
               </ul>
@@ -85,167 +85,9 @@
                     </div>
                   </div>
 
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsf all cameras ever.
-                    </p>
-                  </div>
-                </div>
+                  {{/each}}
 
 
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-      </div>
-      <div class="inventory-column">
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Brand New Camera
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc">
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-      </div>
-      <div class="inventory-column">
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Brand New Camera
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc">
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-      </div>
-      <div class="inventory-column">
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Brand New Camera
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc">
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-
-
-                <div class="inventory-card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo id quisquam?
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-desc"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit debitis, repellendus repellat numquam provident sit atque eius cum quos harum adipisci nam, dolorum nostrum nihil fuga similique repudiandae quaerat voluptate! Voluptate similique temporibus libero adipisci accusantium. Beatae eos iure, natus perspiciatis earum.
-                      This camera is the greatest of all cameras ever.
-                    </p>
-                  </div>
-                </div>
-      </div>
   </div>
 
 </div>

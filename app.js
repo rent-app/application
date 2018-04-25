@@ -40,6 +40,12 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
         return opts.inverse(this)
     }
 })
+
+var conditionMap = ['Worn', 'Very Used', 'Moderately Used', 'Rarely Used', 'Like New', 'Brand New']
+
+hbs.registerHelper('conditionLabel', function(num) {
+    return conditionMap[num]
+})
 // Register partials
 var partials = "./views/partials/";
 fs.readdirSync(partials).forEach(function (file) {

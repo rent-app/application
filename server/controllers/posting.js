@@ -40,14 +40,7 @@ exports.posting_create = [
              console.log("new posting: "+req.body.title+" "+new_id);
         }];
 
-exports.posting_list_all = [
-
-    (req, res, next) => {
-        return Posting
-            .find()
-            .then(function (inventory) {
-                return res.send(inventory);
-                }
-            )        
-    }
-];
+exports.posting_list_all = (req, res, loadPage) => Posting
+          .find().then(data => {
+              loadPage(req, res, 'base', 'inventory', 'Available Listings', data)
+            })
