@@ -2,6 +2,9 @@
   <div class="page-header">
     What do you want to rent?
   </div>
+{{#each data}}
+<h1> {{this.title}}</h1>
+{{/each}}
   <div id="inventoryList">
       <div class="inventory-column">
                 <div class="inventory-card" type="button"  data-toggle="modal" data-target=".bd-example-modal-lg">

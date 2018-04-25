@@ -1,5 +1,15 @@
 var Posting = require('../models/posting');
 
+  function loadPage(req, res, layout, file_id, title, data ){
+    res.render(layout, {
+      page: function(){ return file_id},
+      scripts: function(){ return file_id+'_scripts'},
+      links: function(){ return file_id+'_links'},
+      title: title,
+      nav: file_id,
+      data: data,
+      user: req.session.user,
+    })};
 
 // Handle posting creation on POST.
 exports.posting_create = [
@@ -11,7 +21,7 @@ exports.posting_create = [
             return Math.floor(Math.random() * Math.floor(max));
           };
           var new_id = getRandomInt(9999999999);
-          console.log(req.sessionID)
+          console.log(req.session)
     // Create new posting
         var posting = new Posting({
             title: req.body.title,
@@ -21,9 +31,9 @@ exports.posting_create = [
             location: req.body.location,
             id_posting: new_id,
             image: req.body.image,
-            seller_email: req.session.user,
-            seller_name: req.session.name,
-            seller_image: req.session.image,
+            seller_email: req.session.user.email,
+            seller_name: req.session.user.name,
+            seller_image: req.session.user.image,
         });
     // Enter new member into database
         Posting.create(posting);
@@ -41,13 +51,12 @@ exports.posting_create = [
         }];
 
 exports.posting_list_all = [
-
     (req, res, next) => {
         return Posting
             .find()
             .then(function (inventory) {
-                return res.send(inventory);
+                console.log(inventory)
+                loadPage(req, res, 'base', 'inventory', 'Available Listings',inventory)
                 }
-            )        
-    }
+            )}
 ];
