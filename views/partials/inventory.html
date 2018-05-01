@@ -54,7 +54,7 @@
             </div>
             <div class="modal-info">
               <div class="modal-seller-image">
-                <img src="{{this.seller_image}}" alt="">
+                <img src="{{this.seller.image_url}}" alt="">
               </div>
               <div class="modal-user-rating">
                 <i class="fa fa-star"></i>
@@ -64,9 +64,9 @@
                 <i class="far fa-star"></i>
               </div>
               <ul>
-                <li><span class="info-label">Seller:</span> {{this.seller_name}}</li>
-                <li><span class="info-label">Phone:</span> (777) 777-7777</li>
-                <li><span class="info-label">Email:</span> {{this.seller_email}}</li>
+                <li><span class="info-label">Seller:</span> {{this.seller.name}}</li>
+                <li><span class="info-label">Phone:</span> {{this.seller.phone}}</li>
+                <li><span class="info-label">Email:</span> {{this.seller.email}}</li>
                 <li><span class="info-label">Condition:</span> {{conditionLabel this.condition}}</li>
                 <li><span class="info-label">Details:</span> {{this.description}}</li>
 

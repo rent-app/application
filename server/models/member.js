@@ -19,7 +19,7 @@ const MemberSchema = new Schema({
         maxlength: 50,
         lowercase: true,
         allowNull: false,
-        index: true,
+        unique: true
     },
     image_url: {
         type: String,
@@ -30,6 +30,12 @@ const MemberSchema = new Schema({
         index: false,
         default: 'https://orig00.deviantart.net/10e3/f/2013/114/8/4/facebook_default_profile_picture___clone_trooper_by_captaintom-d62v2dr.jpg'
     },
+    phone: {
+        type: String,
+        minlength: 1,
+        maxlength: 20,
+        default: 2038675309
+},
     hashed_password: {
         type: String,
         allowNull: false,

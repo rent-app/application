@@ -67,7 +67,7 @@ module.exports = (app, sessionChecker, loadError) => {
 app.get('/',  (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
 
   // route for Inventory-Page
-app.get('/inventory', sessionChecker, (req, res) => postingController.posting_list_all(req, res, loadPage));
+app.get('/inventory',  (req, res) => postingController.posting_list_all(req, res, loadPage));
 
 //app.post('/login', membersController.login)
       // route for user's dashboard

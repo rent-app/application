@@ -28,9 +28,13 @@ exports.member_create = [
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.email))
         loadError(req, res, 'Name, email and body must be below 50 characters');
 
+      //check the phone number
+      if (req.body.phone.length != 10)
+        loadError(req,res, 'Please enter a 10 digit phone number')
+
       //check if image_url is jpeg,jpg...
       // console.log(req.body.image_url.match(/\.(jpeg|jpg|gif|png)$/))
-      if(req.body.image_url.match(/\.(jpeg|jpg|gif|png)$/))
+      if(!req.body.image_url.match(/\.(jpeg|jpg|gif|png)$/))
         loadError(req, res, 'Image URL must be jpeg, jpg, gif or png. Leave blank for default image.');
 
       //check that password and password confirm match
@@ -40,6 +44,9 @@ exports.member_create = [
       return 'pass'
     })
     .then(output => {
+        //Update phone format
+        req.body.phone = "(" + req.body.phone.substring(0,3) + ") " + req.body.phone.substring(4,6) + "-" + req.body.phone.substring(7,10);
+        console.log(req.body.phone)
         // Hashes password
         var hash = bcrypt.hashSync(req.body.pwd, salt)
         var user_creds = {
