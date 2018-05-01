@@ -4,8 +4,6 @@ const postingController = require('../controllers/posting');
 const fetch = require('node-fetch');
 const fs = require('fs');
 
-
-
 module.exports = (app, sessionChecker, loadError) => {
   // Wrapper function to fetch
   function _api(url) {
@@ -27,7 +25,6 @@ module.exports = (app, sessionChecker, loadError) => {
       data: data,
       user: req.session.user,
     });
-
   }
 
   function sessionChecker(req,res,next){
@@ -38,57 +35,38 @@ module.exports = (app, sessionChecker, loadError) => {
 
   // route for new Mailing List email
   app.post('/maillist/create', maillistController.maillist_create);
-
   // route for new Member
   app.post('/member/create', memberController.member_create);
   // route for Logging In
   app.post('/member/login', memberController.member_login);
   // test route for fake new Member
   app.post('/member/test', memberController.member_test_create);
-
     // route for Posting-Page
   app.get('/posting', sessionChecker, (req, res) => loadPage(req, res, 'base', 'posting', 'Post Your Item'));
   // route for Error Page
   app.get('/error', (req, res) => res.render('base', {
-        page: function(){ return 'error'},
-        title: 'Error',
-        nav: 'error',
-        scripts: function(){ return 'error_scripts'},
-        links: function(){ return 'error_links'},
-        message: req.query.msg
-      }));
-
+    page: function(){ return 'error'},
+    title: 'Error',
+    nav: 'error',
+    scripts: function(){ return 'error_scripts'},
+    links: function(){ return 'error_links'},
+    message: req.query.msg
+  }));
   // route for new Posting
   app.post('/posting/create', postingController.posting_create);
-
-  //route
-
   // route for Home-Page
-app.get('/',  (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
-
-  // route for Inventory-Page
-app.get('/inventory',  (req, res) => postingController.posting_list_all(req, res, loadPage));
-
-//app.post('/login', membersController.login)
-      // route for user's dashboard
-app.get('/dashboard', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.render('dashboard', {
-          user: req.session.user
-        });
-    } else {
-        res.redirect('/login');
-    }
-});
-// route for user logout
-app.get('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.clearCookie('user_sid');
-        res.redirect('/');
-    } else {
-        res.redirect('/login');
-    }
-});
+  app.get('/',  (req, res) => loadPage(req, res, 'full', 'home', 'Welcome'));
+    // route for Inventory-Page
+  app.get('/inventory', (req, res) => postingController.posting_list_all(req, res, loadPage));
+  // route for user logout
+  app.get('/logout', (req, res) => {
+      if (req.session.user && req.cookies.user_sid) {
+          res.clearCookie('user_sid');
+          res.redirect('/');
+      } else {
+          res.redirect('/login');
+      }
+  });
 
   app.get('/api', (req, res) => res.status(200).send({
     message: 'Welcome to the Rent Everything API!',

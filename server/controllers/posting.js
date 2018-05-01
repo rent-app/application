@@ -8,7 +8,6 @@ exports.posting_create = [
     (req, res, next) => {
 
     // Generate random 10-digit number id
-          console.log(req.session)
     // Create new posting
         var posting = new Posting({
             title: req.body.title,
@@ -21,7 +20,6 @@ exports.posting_create = [
         });
     // Enter new member into database
         Posting.create(posting);
-             console.log(req.body.title + 'posted')
              res.redirect('/inventory')
         }];
 
@@ -30,10 +28,5 @@ exports.posting_list_all = (req, res, loadPage) => Posting.
           .populate('seller')
           .exec(function(err, Posting){
               if (err) return (err);
-              console.log(Posting)
             loadPage(req, res, 'base', 'inventory', 'Available Listings', Posting)
           })
-
-
-
-

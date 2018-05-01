@@ -33,7 +33,6 @@ exports.member_create = [
         loadError(req,res, 'Please enter a 10 digit phone number')
 
       //check if image_url is jpeg,jpg...
-      // console.log(req.body.image_url.match(/\.(jpeg|jpg|gif|png)$/))
       if(!req.body.image_url.match(/\.(jpeg|jpg|gif|png)$/))
         loadError(req, res, 'Image URL must be jpeg, jpg, gif or png. Leave blank for default image.');
 
@@ -46,7 +45,6 @@ exports.member_create = [
     .then(output => {
         //Update phone format
         req.body.phone = "(" + req.body.phone.substring(0,3) + ") " + req.body.phone.substring(4,6) + "-" + req.body.phone.substring(7,10);
-        console.log(req.body.phone)
         // Hashes password
         var hash = bcrypt.hashSync(req.body.pwd, salt)
         var user_creds = {
@@ -60,7 +58,6 @@ exports.member_create = [
         Member.create(user_creds)
         .then(output => {
           // Load the listings page
-          console.log(user_creds.name+" is now a member");
           req.session.user = user_creds;
           res.redirect('/inventory')
         })
@@ -121,5 +118,4 @@ exports.member_test_create = [
         // Enter new member into database
         Member.create(member);
              res.send(username+" "+new_id+" is now a member");
-             console.log(username+" "+new_id+" is now a member");
         }];

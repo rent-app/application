@@ -22,8 +22,6 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
-
 // Log requests to the console.
 app.use(logger('dev'));
 
@@ -51,7 +49,6 @@ var partials = "./views/partials/";
 fs.readdirSync(partials).forEach(function (file) {
     var source = fs.readFileSync(partials + file, "utf8"),
         partial = /(.+)\.html/.exec(file).pop();
-
     hbs.registerPartial(partial, source);
 });
 
@@ -93,10 +90,6 @@ var sessionChecker = (req, res, next) => {
 var loadError = (req, res, msg) => {
   res.status(401).redirect('/error?msg='+encodeURIComponent(msg))
 }
-
-
-
-
 
 // Require our routes into the application.
 require('./server/routes')(app, sessionChecker, loadError);
